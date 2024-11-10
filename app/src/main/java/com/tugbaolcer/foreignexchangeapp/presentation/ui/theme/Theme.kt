@@ -1,4 +1,4 @@
-package com.tugbaolcer.foreignexchangeapp.ui.theme
+package com.tugbaolcer.foreignexchangeapp.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
