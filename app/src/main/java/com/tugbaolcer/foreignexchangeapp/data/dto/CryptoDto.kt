@@ -1,12 +1,14 @@
 package com.tugbaolcer.foreignexchangeapp.data.dto
 
-import com.tugbaolcer.foreignexchangeapp.domain.model.Crypto
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 data class CryptoDto(
     val result: List<Result>,
     val success: Boolean
-){
+): Parcelable {
+    @Parcelize
     data class Result(
         val changeDay: Double,
         val changeDaystr: String,
@@ -24,14 +26,14 @@ data class CryptoDto(
         val pricestr: String,
         val volume: Double,
         val volumestr: String
-    )
+    ): Parcelable
 }
 
-fun CryptoDto.toCrypto():List<Crypto>{
-    return result.map { result -> Crypto(
-        name = result.name,
-        pricestr = result.pricestr,
-        currency = result.currency,
-        code = result.code
-    ) }
-}
+//fun CryptoDto.toCrypto():List<Crypto>{
+//    return result.map { result -> Crypto(
+//        name = result.name,
+//        pricestr = result.pricestr,
+//        currency = result.currency,
+//        code = result.code
+//    ) }
+//}
