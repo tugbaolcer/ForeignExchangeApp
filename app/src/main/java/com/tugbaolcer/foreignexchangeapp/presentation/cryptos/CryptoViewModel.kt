@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,10 +24,12 @@ class CryptoViewModel @Inject constructor(
     private var job: Job? = null
 
     init {
-        getCrypto()
+        viewModelScope.launch {
+            getCrypto()
+        }
     }
 
-    private fun getCrypto() {
+    private suspend fun getCrypto() {
         job?.cancel()
 
         job = cryptoUseCase.invoke().onEach {

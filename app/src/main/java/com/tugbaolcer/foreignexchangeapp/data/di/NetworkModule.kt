@@ -4,7 +4,6 @@ import com.tugbaolcer.foreignexchangeapp.BuildConfig
 import com.tugbaolcer.foreignexchangeapp.data.dto.AppApi
 import com.tugbaolcer.foreignexchangeapp.data.repository.CryptoRepositoryImpl
 import com.tugbaolcer.foreignexchangeapp.domain.repository.CryptoRepository
-import com.tugbaolcer.foreignexchangeapp.domain.usecase.CryptoUseCase
 import com.tugbaolcer.foreignexchangeapp.util.Constants.BASE_URL
 import com.tugbaolcer.foreignexchangeapp.util.Constants.CONTENT_TYPE
 import dagger.Module
@@ -21,7 +20,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
 
     @Singleton
     @Provides
@@ -67,11 +65,5 @@ object NetworkModule {
     @Singleton
     fun provideCryptoRepository(appApi: AppApi): CryptoRepository {
         return CryptoRepositoryImpl(appApi)
-    }
-
-    @Provides
-    @Singleton
-    fun provideCryptoUseCase(cryptoRepository: CryptoRepository): CryptoUseCase {
-        return CryptoUseCase(cryptoRepository)
     }
 }
