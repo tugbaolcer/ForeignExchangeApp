@@ -11,18 +11,24 @@ data class OnboardingData(
 
 val pages = listOf(
     OnboardingData(
-        title = "Secure",
-        description = "Quick money transfer in wallet",
+        title = "Güncel Döviz Kurları",
+        description = "Anlık güncellemelerle döviz kurlarını takip edin.\n" +
+                "İhtiyaç duyduğunuz tüm para birimlerini elinizin altında bulun.\n" +
+                "Döviz fiyatlarını kaçırmadan işlem yapın!",
         image = R.drawable.onboarding_one
     ),
     OnboardingData(
-        title = "Real Time",
-        description = "Exchange different currencies easily",
+        title = "Kişiselleştirilmiş Bildirimler",
+        description = "Hedef kur seviyenizi belirleyin, size haber verelim!\n" +
+                "Favori para birimlerinizi seçin, anında takip edin.\n" +
+                "Döviz değişikliklerini kaçırmamak için özelleştirilmiş bildirimler alın.",
         image = R.drawable.onboarding_two
     ),
     OnboardingData(
-        title = "Keep Control",
-        description = "Always track your transactions",
+        title = "Kolay ve Hızlı Kullanım",
+        description = "Kullanıcı dostu arayüz ile işlemlerinizi hızla gerçekleştirin.\n" +
+                "Döviz bilgilerini kolayca analiz edin ve karşılaştırın.\n" +
+                "Tüm döviz ihtiyacınız için tek bir platform kullanın!",
         image = R.drawable.onboarding_three
     )
 )
