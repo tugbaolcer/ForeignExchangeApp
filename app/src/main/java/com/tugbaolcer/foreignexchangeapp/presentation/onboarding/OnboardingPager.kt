@@ -40,6 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tugbaolcer.foreignexchangeapp.R
+import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomButton
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.BlackTwoColor
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.BottomCardShape
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.CharcoalColor
@@ -156,8 +157,7 @@ fun OnBoardingPager(
                                         14.dp,
                                         Color.White
                                     ),
-                                    shape = RoundedCornerShape(50), // = 50% percent
-                                    //or shape = CircleShape
+                                    shape = RoundedCornerShape(50),
                                     colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Gray),
                                     modifier = Modifier.size(65.dp)
                                 ) {
@@ -169,23 +169,10 @@ fun OnBoardingPager(
                                     )
                                 }
                             } else {
-                                Button(
-                                    onClick = {},
-                                    modifier = Modifier.fillMaxWidth(),
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = BlackTwoColor
-                                    ),
-                                    contentPadding = PaddingValues(vertical = 12.dp),
-                                    elevation = ButtonDefaults.elevatedButtonElevation(
-                                        defaultElevation = 0.dp
-                                    )
-                                ) {
-                                    Text(
-                                        text = "Get Started",
-                                        color = Color.White,
-                                        fontSize = 16.sp
-                                    )
-                                }
+                                CustomButton(buttonText = "Get Started",
+                                    onCustomClick = {
+                                        // Register yada login sayfasına geçiş
+                                    })
                             }
                         }
                     }

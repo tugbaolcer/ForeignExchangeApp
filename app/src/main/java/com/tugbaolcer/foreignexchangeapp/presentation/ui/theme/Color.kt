@@ -12,4 +12,7 @@ val Pink40 = Color(0xFF7D5260)
 
 val BlackTwoColor = Color(0xFF1e1e23)
 val CharcoalColor = Color(0xFF2a2836)
+val HubBackgroundColor = Color(0xFF262e36)
+val ContainerColor = Color(0xFF3B3848)
 val SelectedIndicatorColor = Color(0xFF4a287f)
+val UnSelectedIndicatorColor = Color(0xFF615D7C)
