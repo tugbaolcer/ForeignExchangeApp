@@ -1,9 +1,8 @@
 package com.tugbaolcer.foreignexchangeapp.presentation.hub
 
-import android.content.res.Configuration
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,8 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,16 +21,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tugbaolcer.foreignexchangeapp.R
 import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomButton
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.BlackTwoColor
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.ContainerColor
-import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.ForeignExchangeAppTheme
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.HubBackgroundColor
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.RoundedCornerCard
 
@@ -45,10 +42,17 @@ fun ContainerPage() {
     var password by remember { mutableStateOf("") }
     var rePassword by remember { mutableStateOf("") }
 
+    val focusManager = LocalFocusManager.current
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(color = HubBackgroundColor)
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                })
+            }
     ) {
         HeaderImage()
         ContentBox(
@@ -62,7 +66,8 @@ fun ContainerPage() {
             onPasswordChange = { password = it },
             rePassword = rePassword,
             onRePasswordChange = { rePassword = it },
-            onLoginClick = { /* login işlemi */ }
+            onLoginClick = {
+            }
         )
     }
 }
@@ -134,9 +139,7 @@ fun ContentBox(
                         onRePasswordChange = onRePasswordChange
                     )
                     Spacer(modifier = Modifier.height(15.dp))
-                    CustomButton(buttonText = "Register") {
-
-                    }
+                    CustomButton(buttonText = "Register") {}
                 }
             }
 
@@ -144,36 +147,3 @@ fun ContentBox(
     }
 }
 
-
-
-@Composable
-fun RegisterButton(onRegisterClick: () -> Unit) {
-    OutlinedButton(
-        onClick = onRegisterClick,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 30.dp, vertical = 16.dp)
-            .height(50.dp),
-        colors = ButtonColors(
-            contentColor = Color.White,
-            containerColor = Color.Gray,
-            disabledContentColor = Color.Red,
-            disabledContainerColor = Color.Gray
-        ),
-        border = BorderStroke(
-            width = 1.dp,
-            color = Color.White
-        )
-    ) {
-        Text("Register", color = Color.White)
-    }
-}
-
-@Composable
-@Preview(showBackground = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
-fun RegisterPagePreview() {
-    ForeignExchangeAppTheme {
-        ContainerPage()
-    }
-}

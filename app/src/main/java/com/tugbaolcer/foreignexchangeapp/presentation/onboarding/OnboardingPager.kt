@@ -1,6 +1,5 @@
 package com.tugbaolcer.foreignexchangeapp.presentation.onboarding
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -8,20 +7,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -36,15 +31,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.tugbaolcer.foreignexchangeapp.R
 import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomButton
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.BlackTwoColor
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.BottomCardShape
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.CharcoalColor
-import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.ForeignExchangeAppTheme
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -56,8 +50,9 @@ import kotlinx.coroutines.launch
 fun OnBoardingPager(
     item: List<OnboardingData>,
     pagerState: PagerState,
-    modifier: Modifier = Modifier
-) {
+    modifier: Modifier = Modifier,
+    navController: NavController
+    ) {
 
     Box(modifier = modifier) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -134,7 +129,7 @@ fun OnBoardingPager(
                         ) {
                             if (pagerState.currentPage != 2) {
                                 TextButton(onClick = {
-                                    //skip
+                                    navController.navigate("containerPage")
                                 }) {
                                     Text(
                                         text = "Skip Now",
@@ -171,7 +166,7 @@ fun OnBoardingPager(
                             } else {
                                 CustomButton(buttonText = "Get Started",
                                     onCustomClick = {
-                                        // Register yada login sayfasına geçiş
+                                        navController.navigate("containerPage")
                                     })
                             }
                         }
@@ -182,24 +177,25 @@ fun OnBoardingPager(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-@Preview(showBackground = true)
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-fun OnBoardingPagerPreview() {
-    ForeignExchangeAppTheme {
-        val pagerState = rememberPagerState(
-            pageCount = { 3 },
-            initialPage = 0,
-            initialPageOffsetFraction = 0f
-        )
 
-        OnBoardingPager(
-            item = pages,
-            pagerState = pagerState,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Blue)
-        )
-    }
-}
+//@OptIn(ExperimentalFoundationApi::class)
+//@Composable
+//@Preview(showBackground = true)
+//@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+//fun OnBoardingPagerPreview() {
+//    ForeignExchangeAppTheme {
+//        val pagerState = rememberPagerState(
+//            pageCount = { 3 },
+//            initialPage = 0,
+//            initialPageOffsetFraction = 0f
+//        )
+//
+//        OnBoardingPager(
+//            item = pages,
+//            pagerState = pagerState,
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .background(Color.Blue)
+//        )
+//    }
+//}

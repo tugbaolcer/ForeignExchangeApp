@@ -14,10 +14,12 @@ import androidx.compose.ui.unit.sp
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.BlackTwoColor
 
 @Composable
-fun CustomButton(buttonText: String, onCustomClick:() -> Unit ){
+fun CustomButton(buttonText: String, onCustomClick: () -> Unit ){
     Button(
-        onClick = onCustomClick,
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 30.dp),
+        onClick = { onCustomClick()  },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 30.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = BlackTwoColor
         ),
