@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -38,6 +39,19 @@ android {
             )
         }
     }
+
+    flavorDimensions += "version"
+
+    productFlavors {
+        create("dev") {
+            applicationId = "com.tugbaolcer.foreignexchangeapp"
+            applicationIdSuffix = ".test"
+            resValue ("string", "app_name", "foreignexchangeapp ${versionName}-test")
+            buildConfigField ("String", "ENDPOINT", "\"https://api.collectapi.com\"")
+            versionNameSuffix = "-test"
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -96,6 +110,11 @@ dependencies {
     implementation (libs.converter.gson)
     implementation (libs.okhttp)
     implementation (libs.logging.interceptor)
+
+    //Firebase
+    implementation (platform(libs.firebase.bom))
+    implementation (libs.firebase.auth)
+    implementation (libs.firebase.firestore)
 
     //Test
     testImplementation(libs.junit)

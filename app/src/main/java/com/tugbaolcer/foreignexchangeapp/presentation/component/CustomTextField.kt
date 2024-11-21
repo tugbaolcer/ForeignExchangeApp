@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.ContainerColor
+import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.BlackTwoColor
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.UnSelectedColor
 
 @Composable
@@ -23,15 +23,15 @@ fun CustomTextField(
 ) {
     val textFieldColors = TextFieldDefaults.colors(
         focusedContainerColor = Color.White,
-        unfocusedContainerColor = ContainerColor,
-        focusedIndicatorColor = Color.White,
+        unfocusedContainerColor = Color.White,
+        focusedIndicatorColor = BlackTwoColor,
         unfocusedIndicatorColor = UnSelectedColor
     )
 
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(text = label, color = Color.White) },
+        label = { Text(text = label, color = BlackTwoColor) },
         colors = textFieldColors,
         visualTransformation = visualTransformation,
         modifier = Modifier

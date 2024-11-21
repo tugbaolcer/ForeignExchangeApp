@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "976893363341",
+    "project_id": "foreign-exchange-app-c2b20",
+    "storage_bucket": "foreign-exchange-app-c2b20.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976893363341:android:794fc91b90cc48ccd70ec4",
+        "android_client_info": {
+          "package_name": "com.tugbaolcer.foreignexchangeapp.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQyri5euso9BCPq7ufRdsfOJkyJuANPSA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

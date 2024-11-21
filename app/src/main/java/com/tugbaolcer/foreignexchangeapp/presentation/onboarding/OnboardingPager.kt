@@ -129,7 +129,7 @@ fun OnBoardingPager(
                         ) {
                             if (pagerState.currentPage != 2) {
                                 TextButton(onClick = {
-                                    navController.navigate("containerPage")
+                                    navController.navigate("hubScreen")
                                 }) {
                                     Text(
                                         text = "Skip Now",
@@ -166,7 +166,7 @@ fun OnBoardingPager(
                             } else {
                                 CustomButton(buttonText = "Get Started",
                                     onCustomClick = {
-                                        navController.navigate("containerPage")
+                                        navController.navigate("hubScreen")
                                     })
                             }
                         }

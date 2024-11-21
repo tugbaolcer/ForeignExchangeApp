@@ -1,5 +1,7 @@
 package com.tugbaolcer.foreignexchangeapp.data.di
 
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.tugbaolcer.foreignexchangeapp.BuildConfig
 import com.tugbaolcer.foreignexchangeapp.data.dto.AppApi
 import com.tugbaolcer.foreignexchangeapp.util.Constants.BASE_URL
@@ -18,6 +20,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    @Provides
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+
+    @Provides
+    fun provideFirebaseFireStore(): FirebaseFirestore = FirebaseFirestore.getInstance()
 
     @Singleton
     @Provides

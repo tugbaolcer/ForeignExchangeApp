@@ -3,12 +3,16 @@ package com.tugbaolcer.foreignexchangeapp.presentation.navgraph
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.tugbaolcer.foreignexchangeapp.presentation.hub.ContainerPage
+import com.tugbaolcer.foreignexchangeapp.presentation.cryptos.CryptoScreen
+import com.tugbaolcer.foreignexchangeapp.presentation.hub.HubScreen
+import com.tugbaolcer.foreignexchangeapp.presentation.hub.login.LoginScreen
+import com.tugbaolcer.foreignexchangeapp.presentation.hub.register.RegisterScreen
 import com.tugbaolcer.foreignexchangeapp.presentation.onboarding.OnBoardingPager
 import com.tugbaolcer.foreignexchangeapp.presentation.onboarding.pages
 
@@ -33,8 +37,14 @@ fun NavGraph(
                 navController = navController
             )
         }
-        composable("containerPage") {
-            ContainerPage()
+
+        composable("hubScreen") { HubScreen( navController) }
+        composable("loginScreen") { LoginScreen(navController) }
+
+        composable("cryptoScreen") {
+            Scaffold { innerPadding ->
+                CryptoScreen(innerPadding)
+            }
         }
     }
 }
