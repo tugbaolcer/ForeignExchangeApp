@@ -1,4 +1,4 @@
-package com.tugbaolcer.foreignexchangeapp.presentation.onboarding
+package com.tugbaolcer.foreignexchangeapp.presentation.screen.onboarding
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi

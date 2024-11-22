@@ -1,4 +1,4 @@
-package com.tugbaolcer.foreignexchangeapp.presentation.onboarding
+package com.tugbaolcer.foreignexchangeapp.presentation.screen.onboarding
 
 import androidx.annotation.DrawableRes
 import com.tugbaolcer.foreignexchangeapp.R

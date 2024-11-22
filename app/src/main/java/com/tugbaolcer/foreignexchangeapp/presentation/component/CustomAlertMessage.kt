@@ -33,7 +33,6 @@ fun CustomAlertMessage(
     onDismiss: () -> Unit
 ) {
     if (isDisplayed) {
-
         BasicAlertDialog(
             onDismissRequest = { onDismiss() },
             modifier = Modifier
@@ -52,7 +51,6 @@ fun CustomAlertMessage(
                     Icon(
                         painter = icon,
                         contentDescription = null,
-                        tint = Color.Blue,
                         modifier = Modifier
                             .size(48.dp)
                             .padding(end = 8.dp) // İkon ve metin arasına boşluk

@@ -1,4 +1,4 @@
-package com.tugbaolcer.foreignexchangeapp.presentation.cryptos
+package com.tugbaolcer.foreignexchangeapp.presentation.screen.cryptos
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.tugbaolcer.foreignexchangeapp.presentation.cryptos.components.CryptoItem
+import com.tugbaolcer.foreignexchangeapp.presentation.screen.cryptos.components.CryptoItem
 
 @Composable
 fun CryptoScreen(

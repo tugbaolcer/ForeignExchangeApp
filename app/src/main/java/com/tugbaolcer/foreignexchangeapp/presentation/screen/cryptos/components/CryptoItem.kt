@@ -1,4 +1,4 @@
-package com.tugbaolcer.foreignexchangeapp.presentation.cryptos.components
+package com.tugbaolcer.foreignexchangeapp.presentation.screen.cryptos.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

@@ -1,6 +1,5 @@
 package com.tugbaolcer.foreignexchangeapp.data.di
 
-import com.google.firebase.auth.FirebaseAuth
 import com.tugbaolcer.foreignexchangeapp.data.repository.AuthRepositoryImpl
 import com.tugbaolcer.foreignexchangeapp.data.repository.CryptoRepositoryImpl
 import com.tugbaolcer.foreignexchangeapp.domain.repository.AuthRepository

@@ -1,26 +1,23 @@
 package com.tugbaolcer.foreignexchangeapp.domain.usecase
 
+import android.util.Log
 import com.tugbaolcer.foreignexchangeapp.data.dto.UserDto
 import com.tugbaolcer.foreignexchangeapp.domain.repository.AuthRepository
+import com.tugbaolcer.foreignexchangeapp.util.Resource
+import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 
-class RegisterUseCase(private val repository: AuthRepository) {
-    suspend operator fun invoke(user: UserDto): Result<Unit> {
-        if (isValidForm(userName = user.name, surname = user.surname, email = user.email, password = user.password ).not()) {
-            return Result.failure(Exception("All fields must be filled"))
+class RegisterUseCase @Inject constructor( private val repository: AuthRepository) {
+
+    suspend operator fun invoke(userDto: UserDto) = flow {
+        emit(Resource.Loading())
+        try {
+            repository.registerUser(userDto)
+            Log.d("LOG_FIRESTORE","$userDto")
+            emit(Resource.Success(Unit))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.message ?: "Registration failed"))
         }
-        return repository.registerUser(user)
-    }
-
-    fun isValidForm(
-        userName: String,
-        surname: String,
-        email: String,
-        password: String
-    ): Boolean {
-        return userName.isNotEmpty() &&
-                surname.isNotEmpty() &&
-                email.isNotEmpty() &&
-                password.isNotEmpty()
     }
 }

@@ -1,4 +1,4 @@
-package com.tugbaolcer.foreignexchangeapp.presentation.hub.register
+package com.tugbaolcer.foreignexchangeapp.presentation.screen.hub.register
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -22,7 +23,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tugbaolcer.foreignexchangeapp.R
-import com.tugbaolcer.foreignexchangeapp.data.dto.UserDto
+import com.tugbaolcer.foreignexchangeapp.domain.viewstate.register.RegisterViewState
 import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomAlertMessage
 import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomButton
 import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomTextField
@@ -30,7 +31,6 @@ import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.RoundedCornerCard
 
 @Composable
 fun RegisterScreen(onRegisterComplete: (() -> Unit)? = null) {
-
     val viewModel: RegisterViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
 
@@ -48,8 +48,8 @@ fun RegisterScreen(onRegisterComplete: (() -> Unit)? = null) {
                 .padding(top = 15.dp)
         ) {
             RegisterInputFields(
-                state = uiState,
-                viewModel = viewModel,
+                registerViewModel = viewModel,
+                registerState = uiState,
                 userName = userName,
                 onUserNameChange = { userName = it },
                 userSurname = surname,
@@ -60,16 +60,22 @@ fun RegisterScreen(onRegisterComplete: (() -> Unit)? = null) {
                 onPasswordChange = { password = it },
                 confirmPassword = confirmPassword,
                 onConfirmPasswordChange = { confirmPassword = it },
-                onRegisterComplete = { onRegisterComplete?.invoke() }
+                onRegisterClicked = {
+                    onRegisterComplete?.invoke()
+                }
             )
+        }
+        // Yükleme durumunu göster
+        if (uiState.isLoading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }
 }
 
 @Composable
 fun RegisterInputFields(
-    state: RegisterUiState,
-    viewModel: RegisterViewModel,
+    registerViewModel: RegisterViewModel,
+    registerState: RegisterViewState,
     userName: String,
     onUserNameChange: (String) -> Unit,
     userSurname: String,
@@ -80,82 +86,79 @@ fun RegisterInputFields(
     onPasswordChange: (String) -> Unit,
     confirmPassword: String,
     onConfirmPasswordChange: (String) -> Unit,
-    onRegisterComplete: (() -> Unit)? = null
+    onRegisterClicked: () -> Unit
 ) {
-    var isAlertMessageVisible by remember { mutableStateOf(false) }
-    var alertMessage by remember { mutableStateOf("") }
-    var alertIcon by remember { mutableStateOf(R.drawable.ic_warning) }
 
-    CustomTextField(
-        value = userName,
-        onValueChange = onUserNameChange,
-        label = "Name"
-    )
-    CustomTextField(
-        value = userSurname,
-        onValueChange = onUserSurnameChange,
-        label = "Surname"
-    )
-    CustomTextField(
-        value = email,
-        onValueChange = onEmailChange,
-        label = "Email"
-    )
-    CustomTextField(
-        value = password,
-        onValueChange = onPasswordChange,
-        visualTransformation = PasswordVisualTransformation(),
-        label = "Password"
-    )
-    CustomTextField(
-        value = confirmPassword,
-        onValueChange = onConfirmPasswordChange,
-        visualTransformation = PasswordVisualTransformation(),
-        label = "Confirmed Password"
-    )
-    Spacer(modifier = Modifier.height(8.dp))
+    var isAlertVisible by remember { mutableStateOf(false) }
 
+    Column {
+        CustomTextField(
+            value = userName,
+            onValueChange = onUserNameChange,
+            label = "Name"
+        )
+        CustomTextField(
+            value = userSurname,
+            onValueChange = onUserSurnameChange,
+            label = "Surname"
+        )
+        CustomTextField(
+            value = email,
+            onValueChange = onEmailChange,
+            label = "Email"
+        )
+        CustomTextField(
+            value = password,
+            onValueChange = onPasswordChange,
+            visualTransformation = PasswordVisualTransformation(),
+            label = "Password"
+        )
+        CustomTextField(
+            value = confirmPassword,
+            onValueChange = onConfirmPasswordChange,
+            visualTransformation = PasswordVisualTransformation(),
+            label = "Confirm Password"
+        )
+        Spacer(modifier = Modifier.height(8.dp))
 
-    when (state) {
-        is RegisterUiState.Idle -> {
-            CustomButton(buttonText = " Register") {
-                if (password == confirmPassword) {
-                    viewModel.registerUser(
-                        UserDto(
-                            name = userName,
-                            surname = userSurname,
-                            email = email,
-                            password = password
-                        )
+        CustomButton(buttonText = "Register") {
+            if (password == confirmPassword) {
+                registerViewModel.onTriggerEvent(
+                    RegisterEvent.RegisterButtonClicked(
+                        name = userName,
+                        surname = userSurname,
+                        email = email,
+                        password = password
                     )
-                }
+                )
+                isAlertVisible = true
             }
-        }
-
-        is RegisterUiState.Loading -> {
-            CircularProgressIndicator()
-        }
-
-        is RegisterUiState.Success -> {
-            isAlertMessageVisible = true
-            alertMessage = "Kayıt Başarılı"
-            alertIcon = R.drawable.ic_warning
-        }
-
-        is RegisterUiState.Error -> {
-            isAlertMessageVisible = true
-            alertMessage = state.message
-            alertIcon = R.drawable.ic_warning
         }
     }
 
-    CustomAlertMessage(
-        isDisplayed = isAlertMessageVisible,
-        title = alertMessage,
-        icon = painterResource(alertIcon),
-        onDismiss = {
-            isAlertMessageVisible = false
-            onRegisterComplete?.invoke()
-        }
-    )
+    // Hata mesajlarını göster
+    if (registerState.errorMessage != null) {
+        CustomAlertMessage(
+            isDisplayed = isAlertVisible,
+            title = "Error",
+            icon = painterResource(R.drawable.ic_warning), // İlgili ikonunuzu kullanın
+            onDismiss = {
+                registerViewModel.onTriggerEvent(RegisterEvent.ClearFields)
+                isAlertVisible = false
+            }
+        )
+    }
+
+    // Kayıt başarıyla tamamlandıysa
+    if (registerState.isSuccess) {
+        CustomAlertMessage(
+            isDisplayed = isAlertVisible,
+            title = "Kayıt Başarılı",
+            icon = painterResource(R.drawable.ic_success),
+            onDismiss = {
+                onRegisterClicked.invoke()
+                isAlertVisible = false
+            }
+        )
+    }
 }

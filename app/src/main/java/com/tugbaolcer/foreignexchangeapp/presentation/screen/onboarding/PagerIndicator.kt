@@ -1,4 +1,4 @@
-package com.tugbaolcer.foreignexchangeapp.presentation.onboarding
+package com.tugbaolcer.foreignexchangeapp.presentation.screen.onboarding
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

@@ -9,12 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.tugbaolcer.foreignexchangeapp.presentation.cryptos.CryptoScreen
-import com.tugbaolcer.foreignexchangeapp.presentation.hub.HubScreen
-import com.tugbaolcer.foreignexchangeapp.presentation.hub.login.LoginScreen
-import com.tugbaolcer.foreignexchangeapp.presentation.hub.register.RegisterScreen
-import com.tugbaolcer.foreignexchangeapp.presentation.onboarding.OnBoardingPager
-import com.tugbaolcer.foreignexchangeapp.presentation.onboarding.pages
+import com.tugbaolcer.foreignexchangeapp.presentation.screen.cryptos.CryptoScreen
+import com.tugbaolcer.foreignexchangeapp.presentation.screen.hub.HubScreen
+import com.tugbaolcer.foreignexchangeapp.presentation.screen.hub.login.LoginScreen
+import com.tugbaolcer.foreignexchangeapp.presentation.screen.hub.register.RegisterScreen
+import com.tugbaolcer.foreignexchangeapp.presentation.screen.onboarding.OnBoardingPager
+import com.tugbaolcer.foreignexchangeapp.presentation.screen.onboarding.pages
 
 
 @OptIn(ExperimentalFoundationApi::class)

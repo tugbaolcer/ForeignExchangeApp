@@ -1,4 +1,4 @@
-package com.tugbaolcer.foreignexchangeapp.presentation.cryptos
+package com.tugbaolcer.foreignexchangeapp.presentation.screen.cryptos
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
