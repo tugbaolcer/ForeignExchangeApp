@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Foreign Exchange App</string>
+    <string name="borsa_istanbul_title">Borsa Istanbul</string>
+    <string name="crypto_title">Cryto</string>
 </resources>
