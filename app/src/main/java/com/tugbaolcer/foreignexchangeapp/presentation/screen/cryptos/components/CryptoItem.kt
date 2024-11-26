@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tugbaolcer.foreignexchangeapp.data.dto.CryptoDto
+import com.tugbaolcer.foreignexchangeapp.data.network.dto.CryptoDto
 
 @Composable
 fun CryptoItem(crypto: CryptoDto.Result) {

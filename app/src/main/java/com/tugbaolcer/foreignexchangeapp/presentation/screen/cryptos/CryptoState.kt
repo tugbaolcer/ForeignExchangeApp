@@ -1,6 +1,6 @@
 package com.tugbaolcer.foreignexchangeapp.presentation.screen.cryptos
 
-import com.tugbaolcer.foreignexchangeapp.data.dto.CryptoDto
+import com.tugbaolcer.foreignexchangeapp.data.network.dto.CryptoDto
 
 data class CryptoState(
     val isLoading:Boolean = false,

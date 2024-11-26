@@ -1,4 +1,4 @@
-package com.tugbaolcer.foreignexchangeapp.data.dto
+package com.tugbaolcer.foreignexchangeapp.data.network.dto
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

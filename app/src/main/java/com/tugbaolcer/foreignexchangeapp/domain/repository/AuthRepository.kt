@@ -1,6 +1,6 @@
 package com.tugbaolcer.foreignexchangeapp.domain.repository
 
-import com.tugbaolcer.foreignexchangeapp.data.dto.UserDto
+import com.tugbaolcer.foreignexchangeapp.data.network.dto.UserDto
 import com.tugbaolcer.foreignexchangeapp.util.Resource
 import kotlinx.coroutines.flow.Flow
 

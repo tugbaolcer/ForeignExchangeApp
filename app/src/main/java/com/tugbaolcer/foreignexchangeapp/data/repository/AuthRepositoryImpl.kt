@@ -4,7 +4,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.firestore.FirebaseFirestore
-import com.tugbaolcer.foreignexchangeapp.data.dto.UserDto
+import com.tugbaolcer.foreignexchangeapp.data.network.dto.UserDto
 import com.tugbaolcer.foreignexchangeapp.domain.repository.AuthRepository
 import com.tugbaolcer.foreignexchangeapp.util.Resource
 import kotlinx.coroutines.Dispatchers

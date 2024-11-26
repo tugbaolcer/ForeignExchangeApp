@@ -12,9 +12,9 @@ import androidx.navigation.compose.rememberNavController
 import com.tugbaolcer.foreignexchangeapp.presentation.screen.cryptos.CryptoScreen
 import com.tugbaolcer.foreignexchangeapp.presentation.screen.hub.HubScreen
 import com.tugbaolcer.foreignexchangeapp.presentation.screen.hub.login.LoginScreen
-import com.tugbaolcer.foreignexchangeapp.presentation.screen.hub.register.RegisterScreen
 import com.tugbaolcer.foreignexchangeapp.presentation.screen.onboarding.OnBoardingPager
 import com.tugbaolcer.foreignexchangeapp.presentation.screen.onboarding.pages
+import com.tugbaolcer.foreignexchangeapp.presentation.screen.stock.StockScreen
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -40,6 +40,7 @@ fun NavGraph(
 
         composable("hubScreen") { HubScreen( navController) }
         composable("loginScreen") { LoginScreen(navController) }
+        composable("stockScreen") { StockScreen() }
 
         composable("cryptoScreen") {
             Scaffold { innerPadding ->

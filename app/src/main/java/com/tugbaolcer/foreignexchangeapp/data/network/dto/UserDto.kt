@@ -1,4 +1,4 @@
-package com.tugbaolcer.foreignexchangeapp.data.dto
+package com.tugbaolcer.foreignexchangeapp.data.network.dto
 
 data class UserDto(
     val name: String,

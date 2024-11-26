@@ -1,7 +1,7 @@
 package com.tugbaolcer.foreignexchangeapp.presentation.screen.hub.register
 
 import androidx.lifecycle.viewModelScope
-import com.tugbaolcer.foreignexchangeapp.data.dto.UserDto
+import com.tugbaolcer.foreignexchangeapp.data.network.dto.UserDto
 import com.tugbaolcer.foreignexchangeapp.domain.usecase.RegisterUseCase
 import com.tugbaolcer.foreignexchangeapp.domain.viewstate.IViewEvent
 import com.tugbaolcer.foreignexchangeapp.domain.viewstate.register.RegisterViewState

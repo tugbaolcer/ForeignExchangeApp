@@ -1,5 +1,6 @@
 package com.tugbaolcer.foreignexchangeapp.presentation.component
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,7 +25,7 @@ import com.tugbaolcer.foreignexchangeapp.R
 fun CustomTopBar(
     modifier: Modifier = Modifier,
     titleText: String,
-    navigationIcon: @Composable () -> Unit,
+    navigationIcon: Int = R.drawable.ic_left_arrow,
     actions: @Composable RowScope.() -> Unit = {},
     backgroundColor: Color = MaterialTheme.colorScheme.background
 ) {
@@ -39,7 +40,15 @@ fun CustomTopBar(
             )
         },
         modifier = modifier,
-        navigationIcon = navigationIcon,
+        navigationIcon = {
+            Icon(
+                painter = painterResource(id = navigationIcon),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(30.dp)
+                    .padding(start = 7.dp)
+            )
+        },
         actions = actions,
         colors = TopAppBarDefaults.topAppBarColors(backgroundColor)
     )
@@ -50,15 +59,6 @@ fun CustomTopBar(
 private fun BodyPreview() {
     CustomTopBar(
         modifier = Modifier,
-        titleText = "Title",
-        navigationIcon = {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_left_arrow),
-                contentDescription = "",
-                modifier = Modifier
-                    .size(30.dp)
-                    .padding(start = 7.dp)
-            )
-        }
+        titleText = "Title"
     )
 }

@@ -1,7 +1,7 @@
 package com.tugbaolcer.foreignexchangeapp.domain.usecase
 
 import android.util.Log
-import com.tugbaolcer.foreignexchangeapp.data.dto.UserDto
+import com.tugbaolcer.foreignexchangeapp.data.network.dto.UserDto
 import com.tugbaolcer.foreignexchangeapp.domain.repository.AuthRepository
 import com.tugbaolcer.foreignexchangeapp.util.Resource
 import kotlinx.coroutines.flow.flow
