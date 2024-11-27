@@ -1,57 +1,51 @@
 package com.tugbaolcer.foreignexchangeapp.presentation.screen.cryptos
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.tugbaolcer.foreignexchangeapp.domain.usecase.CryptoUseCase
+import com.tugbaolcer.foreignexchangeapp.domain.viewstate.crypto.CryptoViewState
+import com.tugbaolcer.foreignexchangeapp.presentation.base.BaseViewModel
+import com.tugbaolcer.foreignexchangeapp.presentation.screen.stocks.StockViewEvent
 import com.tugbaolcer.foreignexchangeapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CryptoViewModel @Inject constructor(
     private val cryptoUseCase: CryptoUseCase
-) : ViewModel() {
-
-    private val _state = mutableStateOf(CryptoState())
-    val state: State<CryptoState> = _state
-
-    private var job: Job? = null
+) : BaseViewModel<CryptoViewState, StockViewEvent>() {
 
     init {
+        getStock()
+    }
+
+    private fun getStock() {
         viewModelScope.launch {
-            getCrypto()
+            setState { currentState.copy(isLoading = true) }
+            delay(2000)
+            cryptoUseCase.invoke().collect{
+                when (it) {
+                    is Resource.Success -> {
+                        setState { currentState.copy(data = it.data, isLoading = false) }
+                    }
+                    is Resource.Error -> {
+                        Log.e("StockViewModel", "Hata Mesajı: ${it.message}")
+
+                        setState { currentState.copy(isLoading = false) }
+                        setEvent(StockViewEvent.SnackBarError(it.message))
+
+                    }
+                    is Resource.Loading -> {
+                        setState { currentState.copy(isLoading = true) }
+                    }
+                }
+            }
         }
     }
 
-    private suspend fun getCrypto() {
-        job?.cancel()
+    override fun createInitialState() = CryptoViewState()
+    override fun onTriggerEvent(event: StockViewEvent) {}
 
-        job = cryptoUseCase.invoke().onEach {
-            when (it) {
-                is Resource.Success<*> -> {
-                    _state.value = _state.value.copy(
-                        crypto = it.data ?: emptyList(),
-                        isLoading = false
-                    )
-                }
-                is Resource.Loading<*> -> {
-                    _state.value = _state.value.copy(
-                        isLoading = true
-                    )
-                }
-                is Resource.Error<*> -> {
-                    _state.value = _state.value.copy(
-                        error = it.message ?: "Error",
-                        isLoading = false
-                    )
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
 }

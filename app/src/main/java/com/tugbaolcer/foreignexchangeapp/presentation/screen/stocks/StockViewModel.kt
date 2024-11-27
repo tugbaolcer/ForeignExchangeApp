@@ -1,4 +1,4 @@
-package com.tugbaolcer.foreignexchangeapp.presentation.screen.stock
+package com.tugbaolcer.foreignexchangeapp.presentation.screen.stocks
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope

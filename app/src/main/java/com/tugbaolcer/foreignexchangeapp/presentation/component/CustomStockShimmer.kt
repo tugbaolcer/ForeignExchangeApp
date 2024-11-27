@@ -46,7 +46,7 @@ fun CustomStockShimmer(
         modifier = modifier
             .fillMaxWidth()
             .height(100.dp)
-            .background(Color.White)
+            .background(Color.Gray)
     ) {
         Row(
             modifier = Modifier
