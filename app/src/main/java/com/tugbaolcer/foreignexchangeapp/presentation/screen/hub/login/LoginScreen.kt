@@ -31,6 +31,7 @@ import com.tugbaolcer.foreignexchangeapp.domain.viewstate.login.LoginViewState
 import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomAlertMessage
 import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomButton
 import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomTextField
+import com.tugbaolcer.foreignexchangeapp.util.Constants.stocksNavigationRoute
 
 
 @Composable
@@ -88,7 +89,6 @@ fun LoginInputFields(
     var isAlertVisible by remember { mutableStateOf(false) }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        // Email ve şifre input alanları
         CustomTextField(value = userEmail, onValueChange = onUserEmailChange, label = "Email")
         CustomTextField(
             value = userPassword,
@@ -99,14 +99,12 @@ fun LoginInputFields(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Login butonu
         CustomButton(buttonText = "Login") {
             loginViewModel.onTriggerEvent(LoginEvent.LoginButtonClicked(userEmail, userPassword))
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Signup (Kayıt Ol) butonu
         TextButton(onClick = {
             onLoginComplete?.invoke()
         }, modifier = modifier) {
@@ -114,25 +112,21 @@ fun LoginInputFields(
         }
     }
 
-    // Eğer bir hata mesajı varsa ve login işlemi başarısız olmuşsa
     if (uiState.errorMessage != null) {
         CustomAlertMessage (
             isDisplayed = isAlertVisible,
             title = uiState.errorMessage ?: "Hatasız Kul Olmaz",
             icon = painterResource(R.drawable.ic_warning) ,
             onDismiss = {
-                // Hata mesajını temizle
                 isAlertVisible = false
                 loginViewModel.clearErrorMessage()
             }
         )
     }
 
-    // Başarılı login işleminde yönlendirme
     if (uiState.isLoggedIn) {
-        navController.navigate("cryptoScreen")
+        navController.navigate(stocksNavigationRoute)
     } else {
-        // Login işlemi sırasında hata oluştuysa alert göster
         if (uiState.errorMessage != null) {
             isAlertVisible = true
         }

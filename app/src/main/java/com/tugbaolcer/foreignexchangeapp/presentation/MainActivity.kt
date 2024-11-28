@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.tugbaolcer.foreignexchangeapp.presentation.navgraph.NavGraph
-import com.tugbaolcer.foreignexchangeapp.presentation.screen.stocks.StockScreen
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.ForeignExchangeAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +14,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             ForeignExchangeAppTheme {
               NavGraph()
-//                StockScreen()
             }
         }
     }

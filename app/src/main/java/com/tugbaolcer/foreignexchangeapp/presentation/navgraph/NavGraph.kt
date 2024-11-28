@@ -1,14 +1,12 @@
 package com.tugbaolcer.foreignexchangeapp.presentation.navgraph
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -50,7 +48,7 @@ fun NavGraph() {
     ) {
         NavHost(
             navController = navController,
-            startDestination = stocksNavigationRoute
+            startDestination = onboardingNavigationRoute
         ) {
 
             composable(onboardingNavigationRoute) {

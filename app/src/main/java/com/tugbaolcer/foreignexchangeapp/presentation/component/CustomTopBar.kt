@@ -25,7 +25,7 @@ import com.tugbaolcer.foreignexchangeapp.R
 fun CustomTopBar(
     modifier: Modifier = Modifier,
     titleText: String,
-    navigationIcon: Int = R.drawable.ic_left_arrow,
+    navigationIcon: Int? = R.drawable.ic_left_arrow,
     actions: @Composable RowScope.() -> Unit = {},
     backgroundColor: Color = MaterialTheme.colorScheme.background
 ) {
@@ -41,13 +41,15 @@ fun CustomTopBar(
         },
         modifier = modifier,
         navigationIcon = {
-            Icon(
-                painter = painterResource(id = navigationIcon),
-                contentDescription = "",
-                modifier = Modifier
-                    .size(30.dp)
-                    .padding(start = 7.dp)
-            )
+            navigationIcon?.let { painterResource(id = it) }?.let { icon->
+                Icon(
+                    painter = icon,
+                    contentDescription = "",
+                    modifier = Modifier
+                        .size(30.dp)
+                        .padding(start = 7.dp)
+                )
+            }
         },
         actions = actions,
         colors = TopAppBarDefaults.topAppBarColors(backgroundColor)

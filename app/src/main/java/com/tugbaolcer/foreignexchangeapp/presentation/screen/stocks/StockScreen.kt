@@ -64,7 +64,8 @@ fun StockScreen() {
         modifier = Modifier.fillMaxSize(),
         topBar = {
             CustomTopBar(
-                titleText = stringResource(id = R.string.stock_title)
+                titleText = stringResource(id = R.string.stock_title),
+                navigationIcon = null
             )
         },
         content = { paddingValues ->

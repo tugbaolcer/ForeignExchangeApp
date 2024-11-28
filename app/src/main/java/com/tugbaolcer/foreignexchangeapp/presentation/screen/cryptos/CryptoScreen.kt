@@ -54,7 +54,8 @@ fun CryptoScreen() {
         modifier = Modifier.fillMaxSize(),
         topBar = {
             CustomTopBar(
-                titleText = stringResource(id = R.string.crypto_title)
+                titleText = stringResource(id = R.string.crypto_title),
+                navigationIcon = null
             )
         },
         content = { paddingValues ->
