@@ -19,10 +19,12 @@ import com.tugbaolcer.foreignexchangeapp.presentation.screen.hub.login.LoginScre
 import com.tugbaolcer.foreignexchangeapp.presentation.screen.onboarding.OnBoardingPager
 import com.tugbaolcer.foreignexchangeapp.presentation.screen.onboarding.pages
 import com.tugbaolcer.foreignexchangeapp.presentation.screen.stocks.StockScreen
+import com.tugbaolcer.foreignexchangeapp.presentation.screen.splash.SplashScreen
 import com.tugbaolcer.foreignexchangeapp.util.Constants.cryptoNavigationRoute
 import com.tugbaolcer.foreignexchangeapp.util.Constants.hubNavigationRoute
 import com.tugbaolcer.foreignexchangeapp.util.Constants.loginNavigationRoute
 import com.tugbaolcer.foreignexchangeapp.util.Constants.onboardingNavigationRoute
+import com.tugbaolcer.foreignexchangeapp.util.Constants.splashNavigationRoute
 import com.tugbaolcer.foreignexchangeapp.util.Constants.stocksNavigationRoute
 
 
@@ -48,8 +50,12 @@ fun NavGraph() {
     ) {
         NavHost(
             navController = navController,
-            startDestination = onboardingNavigationRoute
+            startDestination = splashNavigationRoute
         ) {
+
+            composable(splashNavigationRoute) {
+                SplashScreen(navController = navController)
+            }
 
             composable(onboardingNavigationRoute) {
                 val pagerState = rememberPagerState(

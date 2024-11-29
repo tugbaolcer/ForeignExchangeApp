@@ -5,8 +5,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.tugbaolcer.foreignexchangeapp.BuildConfig
-import com.tugbaolcer.foreignexchangeapp.data.network.dto.AppApi
 import com.tugbaolcer.foreignexchangeapp.data.network.adapter.SafeDoubleAdapter
+import com.tugbaolcer.foreignexchangeapp.data.network.dto.AppApi
 import com.tugbaolcer.foreignexchangeapp.util.Constants.BASE_URL
 import com.tugbaolcer.foreignexchangeapp.util.Constants.CONTENT_TYPE
 import dagger.Module
@@ -64,7 +64,11 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideCryptoAPI(gson: Gson, authInterceptor: Interceptor, loggingInterceptor: HttpLoggingInterceptor): AppApi {
+    fun provideCryptoAPI(
+        gson: Gson,
+        authInterceptor: Interceptor,
+        loggingInterceptor: HttpLoggingInterceptor
+    ): AppApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(

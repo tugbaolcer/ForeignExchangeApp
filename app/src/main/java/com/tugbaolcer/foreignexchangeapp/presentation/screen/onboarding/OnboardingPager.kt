@@ -39,21 +39,20 @@ import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomButton
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.BlackTwoColor
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.BottomCardShape
 import com.tugbaolcer.foreignexchangeapp.presentation.ui.theme.CharcoalColor
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
+import com.tugbaolcer.foreignexchangeapp.util.Constants.hubNavigationRoute
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalFoundationApi::class)
-@DelicateCoroutinesApi
 @Composable
 fun OnBoardingPager(
     item: List<OnboardingData>,
     pagerState: PagerState,
     modifier: Modifier = Modifier,
     navController: NavController
-    ) {
-
+) {
     Box(modifier = modifier) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             HorizontalPager(state = pagerState) { page ->
@@ -129,7 +128,7 @@ fun OnBoardingPager(
                         ) {
                             if (pagerState.currentPage != 2) {
                                 TextButton(onClick = {
-                                    navController.navigate("hubScreen")
+                                    navController.navigate(hubNavigationRoute)
                                 }) {
                                     Text(
                                         text = "Skip Now",
@@ -140,9 +139,11 @@ fun OnBoardingPager(
                                     )
                                 }
 
+                                // GlobalScope yerine doğru coroutine yapılandırması
                                 OutlinedButton(
                                     onClick = {
-                                        GlobalScope.launch {
+                                        // Coroutine kullanarak Main thread'de scroll işlemi
+                                        CoroutineScope(Dispatchers.Main).launch {
                                             pagerState.scrollToPage(
                                                 pagerState.currentPage + 1
                                             )
@@ -166,7 +167,7 @@ fun OnBoardingPager(
                             } else {
                                 CustomButton(buttonText = "Get Started",
                                     onCustomClick = {
-                                        navController.navigate("hubScreen")
+                                        navController.navigate(hubNavigationRoute)
                                     })
                             }
                         }
@@ -176,26 +177,3 @@ fun OnBoardingPager(
         }
     }
 }
-
-
-//@OptIn(ExperimentalFoundationApi::class)
-//@Composable
-//@Preview(showBackground = true)
-//@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-//fun OnBoardingPagerPreview() {
-//    ForeignExchangeAppTheme {
-//        val pagerState = rememberPagerState(
-//            pageCount = { 3 },
-//            initialPage = 0,
-//            initialPageOffsetFraction = 0f
-//        )
-//
-//        OnBoardingPager(
-//            item = pages,
-//            pagerState = pagerState,
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .background(Color.Blue)
-//        )
-//    }
-//}

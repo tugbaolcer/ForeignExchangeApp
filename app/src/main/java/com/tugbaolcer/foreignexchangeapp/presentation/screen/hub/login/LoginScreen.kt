@@ -1,5 +1,6 @@
 package com.tugbaolcer.foreignexchangeapp.presentation.screen.hub.login
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -31,6 +32,7 @@ import com.tugbaolcer.foreignexchangeapp.domain.viewstate.login.LoginViewState
 import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomAlertMessage
 import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomButton
 import com.tugbaolcer.foreignexchangeapp.presentation.component.CustomTextField
+import com.tugbaolcer.foreignexchangeapp.util.Constants.APP_DEVICE_PREFS
 import com.tugbaolcer.foreignexchangeapp.util.Constants.stocksNavigationRoute
 
 
@@ -66,11 +68,6 @@ fun LoginScreen(
                 }
             )
         }
-
-        // Show loading indicator while processing login
-        if (uiState.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-        }
     }
 }
 
@@ -87,6 +84,8 @@ fun LoginInputFields(
     onLoginComplete: (() -> Unit)? = null
 ) {
     var isAlertVisible by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val sharedPreferences = context.getSharedPreferences(APP_DEVICE_PREFS, Context.MODE_PRIVATE)
 
     Column(modifier = Modifier.padding(16.dp)) {
         CustomTextField(value = userEmail, onValueChange = onUserEmailChange, label = "Email")
@@ -126,6 +125,7 @@ fun LoginInputFields(
 
     if (uiState.isLoggedIn) {
         navController.navigate(stocksNavigationRoute)
+        sharedPreferences.edit().putBoolean("IS_LOGGED_IN", true).apply()
     } else {
         if (uiState.errorMessage != null) {
             isAlertVisible = true

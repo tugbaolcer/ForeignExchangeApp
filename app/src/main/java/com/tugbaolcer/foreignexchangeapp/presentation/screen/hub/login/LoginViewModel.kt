@@ -12,8 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginUserUseCase: LoginUseCase
-) : BaseViewModel<LoginViewState, LoginEvent>() {
+    private val loginUserUseCase: LoginUseCase) : BaseViewModel<LoginViewState, LoginEvent>() {
 
     override fun createInitialState() = LoginViewState()
 
@@ -53,7 +52,6 @@ class LoginViewModel @Inject constructor(
     fun clearErrorMessage() {
         setState { copy(errorMessage = null) }
     }
-
 }
 
 sealed class LoginEvent : IViewEvent {
