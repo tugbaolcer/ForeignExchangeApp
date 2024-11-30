@@ -7,7 +7,7 @@ import com.tugbaolcer.foreignexchangeapp.util.Resource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class StockUseCase @Inject constructor(private val repository: CryptoRepository):
+class StocksUseCase @Inject constructor(private val repository: CryptoRepository):
     BaseUseCase<List<StockDto.StockDtoItem>> {
     override suspend fun invoke(): Flow<Resource<List<StockDto.StockDtoItem>>> {
         return repository.getStocks()

@@ -2,7 +2,7 @@ package com.tugbaolcer.foreignexchangeapp.presentation.screen.stocks
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.tugbaolcer.foreignexchangeapp.domain.repository.CryptoRepository
+import com.tugbaolcer.foreignexchangeapp.domain.usecase.StocksUseCase
 import com.tugbaolcer.foreignexchangeapp.domain.viewstate.IViewEvent
 import com.tugbaolcer.foreignexchangeapp.domain.viewstate.stock.StockViewState
 import com.tugbaolcer.foreignexchangeapp.presentation.base.BaseViewModel
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StockViewModel @Inject constructor(
-    private val cryptoRepository: CryptoRepository
+    private val stocksUseCase :StocksUseCase
 ): BaseViewModel<StockViewState, StockViewEvent>(){
 
     init {
@@ -25,7 +25,7 @@ class StockViewModel @Inject constructor(
         viewModelScope.launch {
             setState { currentState.copy(isLoading = true) }
             delay(2000)
-            cryptoRepository.getStocks().collect {
+            stocksUseCase.invoke().collect {
                 when (it) {
                     is Resource.Success -> {
                         setState { currentState.copy(data = it.data, isLoading = false) }

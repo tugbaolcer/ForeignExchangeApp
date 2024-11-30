@@ -5,7 +5,7 @@ import com.tugbaolcer.foreignexchangeapp.domain.repository.CryptoRepository
 import com.tugbaolcer.foreignexchangeapp.domain.usecase.CryptoUseCase
 import com.tugbaolcer.foreignexchangeapp.domain.usecase.LoginUseCase
 import com.tugbaolcer.foreignexchangeapp.domain.usecase.RegisterUseCase
-import com.tugbaolcer.foreignexchangeapp.domain.usecase.StockUseCase
+import com.tugbaolcer.foreignexchangeapp.domain.usecase.StocksUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,5 +38,5 @@ class UseCaseModule {
     @Provides
     fun provideStockUseCase(
         cryptoRepository: CryptoRepository
-    ) = StockUseCase(cryptoRepository)
+    ) = StocksUseCase(cryptoRepository)
 }
