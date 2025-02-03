@@ -4,6 +4,14 @@
 
 ## 🚀 Technologies and Tools
 
+### Preview
+
+
+
+https://github.com/user-attachments/assets/5dfd530f-792c-4fbb-a6f3-3a721948ea68
+
+
+
 ### Android
 - **Jetpack Compose**: Used for building the entire UI with a declarative approach.
 - **MVVM (Model-View-ViewModel)**: Ensures a clean separation of concerns and testable architecture.
